@@ -23,8 +23,10 @@
     <marquee direction="left" scrollamount="5" id="news-marquee">Loading news...</marquee>
   </div>
   <script>
-    const dropboxUrl = 'https://www.dropbox.com/s/c14316e2uxyyhhx/news_ticker.txt?raw=1'; // Replace with your exact Dropbox raw link
-    fetch(dropboxUrl)
+    const dropboxUrl = 'https://www.dropbox.com/s/cl14316e2uxxyyhhnx/news_ticker.txt?raw=1'; // Your exact Dropbox raw link
+    const proxyUrl = 'https://api.allorigins.win/raw?url='; // Alternative CORS proxy (more reliable than cors-anywhere)
+    
+    fetch(proxyUrl + encodeURIComponent(dropboxUrl))
       .then(response => {
         if (!response.ok) {
           throw new Error(`Fetch failed with status: ${response.status}`);
@@ -32,11 +34,12 @@
         return response.text();
       })
       .then(text => {
-        document.getElementById('news-marquee').innerText = text.trim() || 'No news available';
+        const marquee = document.getElementById('news-marquee');
+        marquee.innerText = text.trim() || 'No news available';
       })
       .catch(error => {
         console.error('Fetch Error:', error);
-        document.getElementById('news-marquee').innerText = 'Failed to load news: ' + error.message;
+        document.getElementById('news-marquee').innerText = 'Failed to load: ' + error.message;
       });
   </script>
 </body>
