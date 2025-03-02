@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>News Ticker</title>
+  <style>
+    #ticker {
+      background: #000;
+      color: #fff;
+      padding: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 100%;
+      font-family: Arial, sans-serif;
+    }
+    marquee {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="ticker">
+    <marquee direction="left" scrollamount="5">Loading news...</marquee>
+  </div>
+  <script>
+    fetch('https://www.dropbox.com/s/c14316e2uxyyhhx/news_ticker.txt?raw=1') // Your Dropbox raw link
+      .then(response => response.text())
+      .then(text => {
+        document.querySelector('marquee').innerText = text;
+      });
+  </script>
+</body>
+</html>
