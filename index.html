@@ -20,13 +20,23 @@
 </head>
 <body>
   <div id="ticker">
-    <marquee direction="left" scrollamount="5">Loading news...</marquee>
+    <marquee direction="left" scrollamount="5" id="news-marquee">Loading news...</marquee>
   </div>
   <script>
-    fetch('https://www.dropbox.com/s/c14316e2uxyyhhx/news_ticker.txt?raw=1') // Your Dropbox raw link
-      .then(response => response.text())
+    const dropboxUrl = 'https://www.dropbox.com/s/c14316e2uxyyhhx/news_ticker.txt?raw=1'; // Replace with your exact Dropbox raw link
+    fetch(dropboxUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Fetch failed with status: ${response.status}`);
+        }
+        return response.text();
+      })
       .then(text => {
-        document.querySelector('marquee').innerText = text;
+        document.getElementById('news-marquee').innerText = text.trim() || 'No news available';
+      })
+      .catch(error => {
+        console.error('Fetch Error:', error);
+        document.getElementById('news-marquee').innerText = 'Failed to load news: ' + error.message;
       });
   </script>
 </body>
