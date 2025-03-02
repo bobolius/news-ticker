@@ -24,7 +24,8 @@
   </div>
   <script>
     const dropboxUrl = 'https://www.dropbox.com/s/c14316e2uxyyhhx/news_ticker.txt?raw=1'; // Replace with your Dropbox raw URL
-    fetch(dropboxUrl)
+    const proxyUrl = 'https://api.allorigins.win/raw?url='; // Use this CORS proxy
+    fetch(proxyUrl + encodeURIComponent(dropboxUrl))
       .then(response => {
         if (!response.ok) throw new Error(`Fetch failed: ${response.status}`);
         return response.text();
