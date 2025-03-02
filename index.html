@@ -23,7 +23,7 @@
     <marquee direction="left" scrollamount="5" id="news-marquee">Loading news...</marquee>
   </div>
   <script>
-    const dropboxUrl = 'https://www.dropbox.com/s/c14316e2uxyyhhx/news_ticker.txt?st=tuuyt02a&dl=0'; // Your exact Dropbox raw link
+    const dropboxUrl = 'https://www.dropbox.com/s/c14316e2uxyyhhx/news_ticker.txt?raw=1'; // Your exact Dropbox raw link
     const proxyUrl = 'https://api.allorigins.win/raw?url='; // Alternative CORS proxy (more reliable than cors-anywhere)
     
     fetch(proxyUrl + encodeURIComponent(dropboxUrl))
